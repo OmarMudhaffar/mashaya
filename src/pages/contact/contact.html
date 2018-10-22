@@ -1,17 +1,63 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+     
+      قائمة الاصدقاء
+
+      <div class="msearch">
+          <input type="text" placeholder="اسم الشخص">
+          <ion-icon name="search" id="search" (click)="sefr()" ></ion-icon>
+          <ion-icon name="close" id="close" (click)="hefr()"></ion-icon>
+      </div>
+
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
+
+
+  
+    <div class="myspinner">
+        <i class="fa fa-spinner fa-pulse fa-1x fa-fw" id="loadsp" *ngIf="nofr"></i>
+        <div class="noproblem">
+            <i class="fa fa-frown-o" aria-hidden="true"></i>
+            <p>لا يوجد اصدقاء</p>
+        </div>
+    </div>
+
+<div class="myfriends">
+
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+    <ion-item *ngFor="let item of friends | async | reverse">
+      <ion-avatar item-start>
+        <img [src]="item.image">
+      </ion-avatar>
+      <h2>{{item.name}}</h2>
+      <button ion-button clear item-end (click)="sendHelp(item.fremail,item.name)" >شارك موقعك</button>
     </ion-item>
+
   </ion-list>
+
+</div>
+
+
+<div class="addfriend">
+
+  <ion-list>
+ 
+    <div class="shwornot" *ngFor="let item of users | async | reverse">
+        <ion-item *ngIf="item.email != email">
+            <ion-avatar item-start>
+              <img [src]="item.image">
+            </ion-avatar>
+            <h2>{{item.name}}</h2>
+            <button ion-button clear item-end (click)="addfriend(item.email,item.name,item.image,item.id)" >اضافة كصديق</button>
+          </ion-item>
+    </div>
+
+  </ion-list>
+
+</div>
+
 </ion-content>

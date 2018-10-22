@@ -1,3 +1,86 @@
 page-contact {
 
 }
+
+
+
+page-contact .toolbar-background-md
+
+{
+background: #FF8C00;
+}
+
+
+page-contact .toolbar-title-md {
+    color: #FFF !important;
+    direction: rtl !important;
+    text-align: right;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+page-contact .toolbar-title-md .titletext {
+    width: 100%;
+}
+
+.searchbar-md .searchbar-input {
+    background: transparent;
+    box-shadow: 0 0;
+    direction: rtl;
+    color: #FFF;
+}
+
+.toolbar .searchbar-md {
+    padding-right: 50px;
+    color: #FFF;
+}
+
+.searchbar-md .searchbar-search-icon, .searchbar-md .searchbar-md-cancel {
+    color: #FFF;
+}
+
+.msearch {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+.msearch input {
+    margin: 0 10px;
+    font-size: 16px;
+    border: 0;
+    background: transparent;
+    color: #FFF;
+    border-bottom: 1px solid;
+    width: 0%;
+}
+
+
+.msearch input::placeholder {
+    color: #FFF;
+}
+
+#close {
+    display: none;
+}
+
+page-contact .item-md {
+    direction: rtl;
+    font-family: 'Cairo', sans-serif;
+
+}
+
+page-contact .item-md .item-button {
+    font-size: 15px;
+}
+
+page-contact .addfriend {
+    display: none;
+}
+
+page-contact .noproblem{
+    display: none;
+}

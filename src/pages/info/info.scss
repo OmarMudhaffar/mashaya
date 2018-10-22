@@ -1,0 +1,67 @@
+page-info {
+
+}
+
+
+page-info .toolbar-background-md
+
+{
+background: #FF8C00;
+}
+
+
+page-info .toolbar-title-md {
+    color: #FFF !important;
+    direction: rtl !important;
+    text-align: right;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+ .back-button.show-back-button,
+ .back-button.show-back-button:hover {
+    color: #FFF;
+}
+
+
+page-info .toolbar-title-md span{
+    float: right;
+}
+
+.list-header-md  {
+
+
+    margin-bottom: 5px;
+    border-top: 0;
+    margin-top: 21px;
+
+}
+
+page-info .label-md {
+    margin-bottom: 0px !important;
+
+}
+
+page-info .item-md  {
+    font-family: 'Cairo', sans-serif;
+
+}
+
+page-info .item-md p {
+    text-align: right;
+}
+
+
+page-info .about 
+{
+    font-family: 'Cairo', sans-serif;
+    margin: 30px 10px;
+    text-align: center;
+    direction: rtl;
+}
+
+page-info i {
+    color: #676767;
+    margin: 3px;
+}

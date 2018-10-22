@@ -1,0 +1,65 @@
+page-myhelp {
+
+}
+
+page-myhelp .toolbar-background-md
+
+{
+background: #FF8C00;
+}
+
+
+page-myhelp .toolbar-title-md {
+    color: #FFF !important;
+    direction: rtl !important;
+    text-align: right;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+page-myhelp .back-button.show-back-button,
+page-myhelp .back-button.show-back-button:hover {
+    color: #FFF;
+}
+
+
+page-myhelp .toolbar-title-md span{
+    float: right;
+}
+
+.list-header-md  {
+
+
+    margin-bottom: 5px;
+    border-top: 0;
+    margin-top: 21px;
+
+}
+
+
+
+page-myhelp .card-md{
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    width: 100%;
+}
+
+page-myhelp .item-md {
+    direction: rtl !important;
+}
+
+page-myhelp .item-md:last-child ion-icon {
+    padding-left:5px !important;
+}
+
+page-myhelp .button-inner{
+    font-size: 15px;
+}
+
+page-myhelp .toolbar-title-md p {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

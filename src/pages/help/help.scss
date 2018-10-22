@@ -1,0 +1,41 @@
+page-help {
+
+}
+
+
+page-help .toolbar-background-md
+
+{
+background: #FF8C00;
+}
+
+
+page-help .toolbar-title-md {
+    color: #FFF !important;
+    direction: rtl !important;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+page-help .inputs {
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Cairo', sans-serif;
+}
+
+page-help .inputs input, page-help .inputs textarea {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #CCC;
+    margin-bottom: 10px;
+    direction: rtl;
+    border-radius: 3px;
+}
+
+page-help .inputs button {
+    padding: 20px;
+    width: 100%;
+    border-color: #007bff;
+}

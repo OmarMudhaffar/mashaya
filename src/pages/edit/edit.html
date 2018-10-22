@@ -1,0 +1,32 @@
+<!--
+  Generated template for the HelpPage page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>تعديل طلب المساعدة</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<div id="mymaps" #mymaps style="width: 100%; height: 200px;"></div>    
+
+<div class="inputs">
+ 
+<input type="text" placeholder="المشكلة" #problem [value]="problemv" >
+<input type="text" placeholder="المحافضة" #mohafada [value]="mohafadav" >
+
+<input type="text" placeholder="نقطة دالة" #place [value]="addrv" >
+<input type="text" placeholder="رقم الهاتف (اجباري)" #phone [value]="phonev"> 
+
+<textarea placeholder="وصف المشكلة" #description [value]="desv"></textarea>
+<button ion-button outline (click)="edit(problem.value,place.value,description.value,phone.value,mohafada.value)">تعديل المشكلة</button>
+
+</div>
+
+</ion-content>

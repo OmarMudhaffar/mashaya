@@ -1,0 +1,73 @@
+<!--
+  Generated template for the MyhelpPage page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <p>ابلاغاتي</p>
+      <ion-icon name="arrow-back" (click)="showhome()"></ion-icon>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+
+  <div class="myspinner">
+      <i class="fa fa-spinner fa-pulse fa-1x fa-fw" id="loadsp" *ngIf="noproblem"></i>
+      <div class="noproblem" *ngIf="!noproblem">
+          <i class="fa fa-smile-o" aria-hidden="true"></i>
+          <p>لا توجد ابلاغات</p>
+      </div>
+  </div>
+
+    <ion-card *ngFor="let item of list | async | reverse">
+
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="item.payload.val().image">
+          </ion-avatar>
+          <h2>{{item.payload.val().name}}</h2>
+          <p>{{item.payload.val().date}}</p>
+        </ion-item>
+      
+        <div [id]="item.payload.val().map2" #item.payload.val().map2 style="width: 100%; height: 250px;overflow: hidden;margin-bottom: 10px;"></div>
+      
+        
+        <ion-item>
+            <ion-icon name="flame" item-start large style="color:#e00;font-size: 25px;"></ion-icon>
+            <h2>{{item.payload.val().problem}}</h2>
+            <p>{{item.payload.val().des}}</p>
+          </ion-item>
+      
+        <ion-item>
+            <ion-icon name="map" item-start large style="color:#007bff;font-size: 25px;"></ion-icon>
+            <h2> {{item.payload.val().mohafada}}</h2>
+            <p> {{item.payload.val().addr}}</p>
+          </ion-item>
+        
+        
+          <ion-item>
+        
+            <button ion-button icon-start clear item-end (click)="edit(item.payload.val().problem,item.payload.val().des,item.payload.val().mohafada,item.payload.val().phone,item.payload.val().addr,item.key)" >
+              <ion-icon name="navigate"></ion-icon>
+              تعديل
+            </button>
+
+
+            <button ion-button icon-start clear item-start style="color:red" (click)="delete(item.key)" >
+                <ion-icon name="trash" ></ion-icon>
+                حذف
+              </button>
+
+          </ion-item>
+        
+      
+      </ion-card>
+
+</ion-content>

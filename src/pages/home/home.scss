@@ -1,3 +1,109 @@
 page-home {
 
 }
+
+
+page-home .toolbar-background-md
+
+{
+background: #FF8C00;
+}
+
+
+page-home .toolbar-title-md {
+    color: #FFF !important;
+    direction: rtl !important;
+    text-align: right;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+page-home .toolbar-title-md .titletext {
+    width: 100%;
+}
+
+.tabs-md .tabbar {
+    direction: rtl !important;
+    background: #FF8C00 !important;
+}
+
+.tabs-md .tab-button {
+    color: #FFF !important;
+    font-family: 'Cairo', sans-serif;
+}
+
+.tabs-md .tab-button-icon {
+    color: #FFF !important;
+}
+
+.tabs-md .tab-button[aria-selected=true] {
+    color: #FFF !important;
+}
+
+.tabs-md[tabslayout="icon-top"] .has-icon .tab-button-text {
+margin: 0 !important;
+}
+
+page-home .card-md{
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    width: 100%;
+}
+
+page-home .item-md {
+    direction: rtl !important;
+}
+
+page-home .item-md:last-child ion-icon {
+    padding-left:5px !important;
+}
+
+.tabs-md .tab-button:hover {
+text-decoration: none;
+}
+
+page-home .button-inner{
+    font-size: 15px;
+}
+
+
+page-home .userlogo 
+{
+    width: 100%;
+    text-align: center;
+}
+
+page-home .sections{
+    text-align: left;
+    width: 100%;
+}
+
+page-home .sections ion-icon {
+    margin-right: 15px;
+}
+
+
+.myspinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    font-family: 'Cairo', sans-serif;
+
+    color: #FF8C00;
+}
+
+.noproblem {
+    text-align: center;
+}
+
+.noproblem p {
+    font-size: 25px;
+}
+
+
+.card-md {
+    margin-bottom: 10px !important;
+}

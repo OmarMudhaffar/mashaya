@@ -1,0 +1,96 @@
+page-account {
+
+}
+
+
+page-account .toolbar-background-md
+
+{
+background: #FF8C00;
+}
+
+
+page-account .toolbar-title-md {
+    color: #FFF !important;
+    direction: rtl !important;
+    text-align: right;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+
+page-account .card-content-md {
+    font-family: 'Cairo', sans-serif;
+    position: relative;
+text-align: right;
+}
+
+page-account .card-content-md h2 {
+    margin-bottom: 10px;
+}
+
+page-account .card-content-md p{
+    color: #a0a0a0;
+}
+
+page-account .card-content-md i {
+position: absolute;
+top: 15px;
+left: 15px;
+font-size: 17px;
+color: #616161;
+}
+
+
+
+page-account .card-md{
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    width: 100%;
+}
+
+page-account .item-md {
+    direction: rtl !important;
+}
+
+page-account .item-md:last-child ion-icon {
+    padding-left:5px !important;
+}
+
+.tabs-md .tab-button:hover {
+text-decoration: none;
+}
+
+page-account .button-inner{
+    font-size: 15px;
+}
+
+
+page-account .userlogo 
+{
+    width: 100%;
+}
+
+page-account .itemdes {
+    padding-right: 11px;
+    padding-left: 0;
+    position: relative;
+    text-align: right;
+    font-size: 1.6rem;
+    font-weight: normal;
+    text-transform: none;
+    color: #000;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: flex;
+    -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.itemdes .desjus {
+    margin-right: 20px;
+}
