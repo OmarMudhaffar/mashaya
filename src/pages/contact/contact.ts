@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import * as $ from 'jquery'
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -22,6 +22,10 @@ export class ContactPage {
   nofr = true;
   nofrs = false;
 
+  searchQuery: string = '';
+  items : Array<any> = [];
+  myar = [];
+
 
   constructor(public navCtrl: NavController,
     public db : AngularFireDatabase, public auth : AngularFireAuth,
@@ -40,7 +44,7 @@ export class ContactPage {
           
             if(data[0] != undefined){
               this.nofr = false;
-              $(".myspinner").hide();
+              $("page-contact  .myspinner").hide();
             }
 
             if(data[0] == undefined){
@@ -53,10 +57,18 @@ export class ContactPage {
             })
           })
 
-          this.users = db.list("users").valueChanges();
+
+           db.list("users").valueChanges().subscribe(data => {
+             this.myar = data;
+             this.items = data;
+           });
+
+           
+           this.initializeItems();
 
 
           this.email = user.email;
+
           
         }
       })
@@ -69,10 +81,40 @@ export class ContactPage {
   }
 
 
+  initializeItems() {
+   this.items = this.myar;
+  }
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
+
   sefr(){
     $(".myfriends").hide();
     $(".addfriend").show();
     $(".myspinner").hide();
+    $(".searchbar-md").show();
+  }
+
+
+  cancle(){
+    $(".searchbar-md").hide();
+    $(".addfriend").hide();
+    $(".myfriends").show();
+    $("#search").show();
+  
   }
 
   hefr(){
@@ -99,21 +141,11 @@ export class ContactPage {
   
     $(".myspinner").height(winh - (navh+tabmd));
 
-    $(".msearch input").keyup(done => {
-
-      var text : any = $(".msearch input").val();
-
-      this.users = this.db.list("users",ref => ref.orderByChild("name").equalTo(text)).valueChanges()
-    })
 
   $("#search").click(function(){
-    $(".msearch input").animate({
-      padding:"5px",
-      width:"100%"
-    },100,function(){
+    
       $("#search").hide();
-      $("#close").show();
-    })
+
   })
 
 

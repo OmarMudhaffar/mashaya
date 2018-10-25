@@ -28,7 +28,7 @@ export class HomePage {
   list:Observable<any>;
   map:GoogleMap;
   image = "https://firebasestorage.googleapis.com/v0/b/raeak-iq.appspot.com/o/man.png?alt=media&token=cc38bf2e-5ea3-4210-bafe-25dcf3674013";
-
+  id;
   mySelectedPhoto;
   loading;
   currentPhoto ;
@@ -58,11 +58,12 @@ export class HomePage {
              this.noproblem = false;
             }
             if(data[0] != undefined){
-             $(".myspinner").remove();
+             $("page-home .myspinner").hide();
             }
           })
           db.list("users",ref=>ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data => {
             this.image = data[0]['image'];
+            this.id = data[0]['id'];
           })
         }
       })
@@ -78,7 +79,6 @@ export class HomePage {
   
     $(".myspinner").height(winh - (navh+tabmd));
 
-    
     }
 
 
@@ -222,7 +222,22 @@ export class HomePage {
     
                     this.db.list("problems").update(vimgs.key,{
                       image:url,
-                    }).then( ()=> {cont.unsubscribe()})
+                    }).then( ()=> {
+                      
+                      cont.unsubscribe()
+                    
+                      var cont2 = this.db.list("friends/" + this.id, ref => ref.orderByChild("email").equalTo(this.auth.auth.currentUser.email)).snapshotChanges().subscribe(frdata => {
+                        frdata.forEach(frdatas => {
+                          this.db.list("friends/" + this.id).update(frdatas.key,{
+                            image:url
+                          }).then( ()=> {
+                            cont2.unsubscribe();
+                          })
+                        })
+                      })
+
+
+                    })
     
                   });
     

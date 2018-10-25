@@ -19,7 +19,9 @@
 <div class="inputs">
  
 <input type="text" placeholder="المشكلة" #problem>
-<input type="text" placeholder="المحافضة" #mohafada>
+
+<input type="text" placeholder="المحافضة" (click)="presentActionSheet()" readonly [value]="selectValue" #mohafada>
+
 
 <input type="text" placeholder="نقطة دالة" #place>
 <input type="text" placeholder="رقم الهاتف (اجباري)" #phone>

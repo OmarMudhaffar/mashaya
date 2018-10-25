@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, LoadingController, ToastController, ActionSheetController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
@@ -31,16 +31,15 @@ export class HelpPage {
   lng;
   image;
   name;
+  selectValue = "";
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,public geolocation : Geolocation,
      public platform : Platform , public db : AngularFireDatabase,
      public load : LoadingController, public auth : AngularFireAuth,
-     public toast : ToastController) {
+     public toast : ToastController, public ac : ActionSheetController) {
 
-       
-    
- 
+      
     platform.ready().then( ()=> {
       this.loadmymap();
     });
@@ -59,6 +58,37 @@ export class HelpPage {
     console.log('ionViewDidLoad HelpPage');
   }
 
+
+  presentActionSheet() {
+    const actionSheet = this.ac.create({
+      title: 'اختر المحافضة',
+      cssClass:"dirion",
+      buttons: [
+        {text:"بغداد",handler:()=>{this.selectValue = "بغداد"}},
+        {text:"أربيل",handler:()=>{this.selectValue = "أربيل"}},
+        {text:"لأنبار",handler:()=>{this.selectValue = "لأنبار"}},
+        {text:"بابل",handler:()=>{this.selectValue = "بابل"}},
+        {text:"البصرة",handler:()=>{this.selectValue = "البصرة"}},
+        {text:"حلبجة",handler:()=>{this.selectValue = "حلبجة"}},
+        {text:"دهوك",handler:()=>{this.selectValue = "دهوك"}},
+        {text:"القادسية",handler:()=>{this.selectValue = "القادسية"}},
+        {text:"ديالى",handler:()=>{this.selectValue = "ديالى"}},
+        {text:"ذي قار",handler:()=>{this.selectValue = "ذي قار"}},
+        {text:"السليمانية",handler:()=>{this.selectValue = "السليمانية"}},
+        {text:" صلاح الدين",handler:()=>{this.selectValue = " صلاح الدين"}},
+        {text:"كركوك",handler:()=>{this.selectValue = "كركوك"}},
+        {text:"كربلاء",handler:()=>{this.selectValue = "كربلاء"}},
+        {text:"المثنى",handler:()=>{this.selectValue = "المثنى"}},
+        {text:"بغداد",handler:()=>{this.selectValue = "بغداد"}},
+        {text:"ميسان",handler:()=>{this.selectValue = "ميسان"}},
+        {text:"النجف",handler:()=>{this.selectValue = "النجف"}},
+        {text:"نينوى",handler:()=>{this.selectValue = "نينوى"}},
+        {text:"واسط",handler:()=>{this.selectValue = "واسط"}},
+
+      ]
+    });
+    actionSheet.present();
+  }
 
   loadmymap(){
     

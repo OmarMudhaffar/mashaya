@@ -28,6 +28,7 @@ import { AccountPage } from '../pages/account/account';
 import { MyhelpPage } from '../pages/myhelp/myhelp';
 import { EditPage } from '../pages/edit/edit';
 import { ReversePipe } from '../pipes/reverse/reverse';
+import { SlpashPage } from '../pages/slpash/slpash';
 
 var config = {
   apiKey: "AIzaSyBTs8kR3ggtyWb3lyrOpLd6k_08tli61oU",
@@ -52,6 +53,7 @@ var config = {
     AccountPage,
     MyhelpPage,
     EditPage,
+    SlpashPage,
     ReversePipe
   ],
   imports: [
@@ -71,6 +73,7 @@ var config = {
     TabsPage,
     RegisterPage,
     InfoPage,
+    SlpashPage,
     HelpPage,
     AccountPage,
     MyhelpPage,

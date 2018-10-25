@@ -22,6 +22,7 @@ export class AboutPage {
   map:GoogleMap;
   email;
   noproblem = true;
+  nofr = false;
 
   constructor(public navCtrl: NavController, public auth : AngularFireAuth,
     public db : AngularFireDatabase,
@@ -40,9 +41,12 @@ export class AboutPage {
           db.list("frhelp",ref => ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data => {
             if(data[0] == undefined){
              this.noproblem = false;
+             this.nofr = true;
+
             }
             if(data[0] != undefined){
-             $(".myspinner").remove();
+
+             $("page-about .myspinner").hide();
             }
           })
  

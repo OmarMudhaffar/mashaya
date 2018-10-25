@@ -10,6 +10,7 @@ import {
   Marker,
 
 } from '@ionic-native/google-maps';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the AccountPage page.
@@ -111,5 +112,12 @@ loadmymap(){
 
 
 }
+
+
+showhome(){
+  this.navCtrl.setRoot(HomePage);
+  this.navCtrl.goToRoot;
+}
+
 
 }
