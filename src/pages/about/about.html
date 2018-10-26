@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
 
   <div class="myspinner">
@@ -19,40 +19,43 @@
     </div>
 </div>
 
+<div class="content">
+  
 
 <ion-card *ngFor="let item of list | async | reverse">
 
-  <ion-item>
-    <ion-avatar item-start>
-      <img [src]="item.payload.val().image">
-    </ion-avatar>
-    <h2>{{item.payload.val().name}}</h2>
-    <p>{{item.payload.val().date}}</p>
-  </ion-item>
-
-  <div [id]="item.payload.val().map" #item.payload.val().map style="width: 100%; height: 250px;overflow: hidden;margin-bottom: 10px;"></div>
-
-  
-  <ion-item>
-      <ion-icon name="flame" item-start large style="color:#e00;font-size: 25px;"></ion-icon>
-      <h2>مساعدة من صديق</h2>
-      <p>صديقي احاول مساعدتك للوصول الى مكاني</p>
-    </ion-item>
-
-
     <ion-item>
-  
-      <button ion-button icon-start clear item-end  (click)="delete(item.key)" >
-        <ion-icon name="trash"></ion-icon>
-        حذف
-      </button>
-
-
-      
-
+      <ion-avatar item-start>
+        <img [src]="item.payload.val().image">
+      </ion-avatar>
+      <h2>{{item.payload.val().name}}</h2>
+      <p>{{item.payload.val().date}}</p>
     </ion-item>
   
-
-</ion-card>
+    <div [id]="item.payload.val().map" #item.payload.val().map style="width: 100%; height: 250px;overflow: hidden;margin-bottom: 10px;"></div>
+  
+    
+    <ion-item>
+        <ion-icon name="flame" item-start large style="color:#e00;font-size: 25px;"></ion-icon>
+        <h2>مساعدة من صديق</h2>
+        <p>صديقي احاول مساعدتك للوصول الى مكاني</p>
+      </ion-item>
+  
+  
+      <ion-item>
+    
+        <button ion-button icon-start clear item-end  (click)="delete(item.key)" >
+          <ion-icon name="trash"></ion-icon>
+          حذف
+        </button>
+  
+  
+        
+  
+      </ion-item>
+    
+  
+  </ion-card>
+</div>
 
 </ion-content>

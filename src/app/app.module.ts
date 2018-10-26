@@ -29,6 +29,7 @@ import { MyhelpPage } from '../pages/myhelp/myhelp';
 import { EditPage } from '../pages/edit/edit';
 import { ReversePipe } from '../pipes/reverse/reverse';
 import { SlpashPage } from '../pages/slpash/slpash';
+import { OneSignal } from '@ionic-native/onesignal';
 
 var config = {
   apiKey: "AIzaSyBTs8kR3ggtyWb3lyrOpLd6k_08tli61oU",
@@ -83,6 +84,7 @@ var config = {
     StatusBar,
     SplashScreen,
     Camera,
+    OneSignal,
     Geolocation,
     CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

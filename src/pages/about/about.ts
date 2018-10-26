@@ -65,9 +65,9 @@ export class AboutPage {
     var winh = $(window).height();
     var navh = $(".header").innerHeight();
     var tabmd = $(".tabs-md .tab-button").innerHeight();
-    console.log(tabmd);
+    console.log(tabmd + " : " + navh);
   
-    $(".myspinner").height(winh - (navh+tabmd));
+    $("page-about .myspinner").height(winh - (navh+tabmd));
 
     
     }

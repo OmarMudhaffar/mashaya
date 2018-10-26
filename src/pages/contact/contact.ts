@@ -5,6 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, timer } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Geolocation } from '@ionic-native/geolocation';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-contact',
@@ -30,7 +31,8 @@ export class ContactPage {
   constructor(public navCtrl: NavController,
     public db : AngularFireDatabase, public auth : AngularFireAuth,
     public geolocation : Geolocation, public alert : AlertController,
-    public load : LoadingController,public toast : ToastController) {
+    public load : LoadingController,public toast : ToastController,
+    public oneSignal: OneSignal) {
  
       auth.authState.subscribe(user => {
         if(user != undefined){
@@ -137,9 +139,8 @@ export class ContactPage {
     var winh = $(window).height();
     var navh = $(".header").innerHeight();
     var tabmd = $(".tabs-md .tab-button").innerHeight();
-    console.log(tabmd);
   
-    $(".myspinner").height(winh - (navh+tabmd));
+    $("page-contact .myspinner").height(winh - (navh+tabmd));
 
 
   $("#search").click(function(){
@@ -201,18 +202,40 @@ export class ContactPage {
         lat:pos.coords.latitude,
         lng:pos.coords.longitude,
         }).then( ()=> {
+
+
+
           this.toast.create({
             message:"تم ارسال طلب المساعدة",
             duration:3000,
             cssClass:"dirion"
           }).present();
+
+
+          this.db.list("ids",ref => ref.orderByChild("email").equalTo(this.email)).valueChanges().subscribe(data => {
+            this.oneSignal.postNotification({
+              app_id:"06cdfaf2-b067-4d85-a095-162869f76c6f",
+              include_player_ids:[data[0]['id']],
+              contents: {
+                en: "صديقك يحاول مساعدتك للوصول اليه"
+              },
+              headings: {
+                en: "مساعدة"
+              }
+            })
+          })
+
         })
         }},
         "الغاء"
         ]
       }).present()
 
+     
+
     });
+
+
 
   }
 

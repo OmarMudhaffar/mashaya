@@ -8,6 +8,7 @@ import { CameraOptions, Camera } from '@ionic-native/camera';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { CallNumber } from '@ionic-native/call-number';
 import * as $ from 'jquery'
+import { OneSignal } from '@ionic-native/onesignal';
 
 declare var google;
 import {
@@ -41,7 +42,8 @@ export class HomePage {
     public platform : Platform,
     private camera:Camera,
     public storeg : AngularFireStorage ,
-    public load : LoadingController,public call : CallNumber) {
+    public load : LoadingController,public call : CallNumber,
+    public oneSignal: OneSignal) {
 
       
  
@@ -68,6 +70,10 @@ export class HomePage {
         }
       })
 
+      this.mynote();
+
+      this.checkNote();
+
     }
 
     
@@ -82,7 +88,27 @@ export class HomePage {
     }
 
 
-    
+    mynote(){
+      this.oneSignal.startInit('06cdfaf2-b067-4d85-a095-162869f76c6f', '216519128906');
+  
+  this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+  
+  
+  this.oneSignal.endInit();
+    }
+
+    checkNote(){
+      this.oneSignal.getIds().then( id => {
+        this.db.list("ids",ref => ref.orderByChild("id").equalTo(id.userId)).valueChanges().subscribe( mdata => {
+         if(mdata[0] == undefined){
+           this.db.list("ids").push({
+             id:id.userId,
+             email:this.auth.auth.currentUser.email
+           })
+         }
+        });
+        });
+    }
 
     loadmap(){
 

@@ -11,6 +11,7 @@ import {
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as $ from 'jquery'
+import { OneSignal } from '@ionic-native/onesignal';
 
 /**
  * Generated class for the HelpPage page.
@@ -32,12 +33,14 @@ export class HelpPage {
   image;
   name;
   selectValue = "";
+  email;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,public geolocation : Geolocation,
      public platform : Platform , public db : AngularFireDatabase,
      public load : LoadingController, public auth : AngularFireAuth,
-     public toast : ToastController, public ac : ActionSheetController) {
+     public toast : ToastController, public ac : ActionSheetController,
+     public oneSignal: OneSignal) {
 
       
     platform.ready().then( ()=> {
@@ -45,11 +48,14 @@ export class HelpPage {
     });
    
      auth.authState.subscribe(user => {
-       db.list("users",ref=>ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data =>{
-        this.image = data[0]["image"];
-        this.name = data[0]["name"];
-
-       })
+      if(user != undefined){
+        this.email = user.email
+        db.list("users",ref=>ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data =>{
+         this.image = data[0]["image"];
+         this.name = data[0]["name"];
+ 
+        })
+      }
      })
 
   }
@@ -187,6 +193,31 @@ this.db.list("problems").push({
 
   }
   
+
+  this.db.list("ids").valueChanges().subscribe( ids => {
+
+    ids.forEach(id => {
+
+
+     if(id['email'] != this.email){
+
+      this.oneSignal.postNotification({
+        app_id:"06cdfaf2-b067-4d85-a095-162869f76c6f",
+        include_player_ids:[id['id']],
+        contents: {
+          en: "هناك شخص بحاجة الة مساعدة"
+        },
+        headings: {
+          en: "مشكلة"
+        }
+      })
+
+     }
+     
+    })
+
+  })
+
   }
 
 }
