@@ -212,7 +212,7 @@ export class ContactPage {
           }).present();
 
 
-          this.db.list("ids",ref => ref.orderByChild("email").equalTo(this.email)).valueChanges().subscribe(data => {
+          this.db.list("ids",ref => ref.orderByChild("email").equalTo(useremail)).valueChanges().subscribe(data => {
             this.oneSignal.postNotification({
               app_id:"06cdfaf2-b067-4d85-a095-162869f76c6f",
               include_player_ids:[data[0]['id']],
