@@ -104,9 +104,9 @@ export class ContactPage {
 
 
   sefr(){
-    $(".myfriends").hide();
+    $("page-contact .myfriends").hide();
     $(".addfriend").show();
-    $(".myspinner").hide();
+    $("page-contact .myspinner").hide();
     $(".searchbar-md").show();
   }
 
@@ -116,7 +116,15 @@ export class ContactPage {
     $(".addfriend").hide();
     $(".myfriends").show();
     $("#search").show();
-  
+    
+    this.db.list("friends").valueChanges().subscribe(data => {
+          
+      if(data[0] == undefined){
+        $("page-contact .myspinner").show();
+      }
+
+      })
+
   }
 
   hefr(){
@@ -124,7 +132,7 @@ export class ContactPage {
     this.db.list("friends").valueChanges().subscribe(data => {
           
       if(data[0] == undefined){
-        $(".myspinner").show();
+        $("page-contact .myspinner").show();
       }
 
       })
