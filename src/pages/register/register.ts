@@ -6,7 +6,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import { InfoPage } from '../info/info';
-import firebase from 'firebase';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+
 
 /**
  * Generated class for the RegisterPage page.
@@ -26,7 +27,8 @@ export class RegisterPage {
      public navParams: NavParams,
       public auth : AngularFireAuth,
       public alert : AlertController,public load : LoadingController,
-      public db : AngularFireDatabase) {
+      public db : AngularFireDatabase,
+      private fb: Facebook) {
 
  
   }
@@ -118,38 +120,149 @@ export class RegisterPage {
 
 
 
-  facebook(){
+  facebookSingup(){
 
     
+    var load = this.load.create({
+      content:"جاري انشاء الحساب",
+      cssClass:"dirion"
+    });
+
     var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
     var rand1 = Math.floor(Math.random() * char.length);
     var rand2 = Math.floor(Math.random() * char.length);
     var rand3 = Math.floor(Math.random() * char.length);
     var rand4 = Math.floor(Math.random() * char.length);
     var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
+    var password = char[rand1] + char[rand2] + char[rand3] + char[rand4] + "2443";
 
-    this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(res => {
+
+    this.fb.login(['public_profile', 'user_friends', 'email']).then(logid => {
+      if(logid.status = "connected"){
+       
       
 
-      this.navCtrl.setRoot(TabsPage);
-      this.navCtrl.goToRoot;
+        this.fb.api("/"+logid.authResponse.userID+"/?fields=id,email,name,picture",["public_profile"]).then(res => {
+         
+          load.present();
 
-      this.db.list("users",ref => ref.orderByChild("email").equalTo(res.user.email)).valueChanges().subscribe(data => {
-        if(data[0] == undefined){
-          this.db.list("users").push({
-            email:res.user.email,
-            name:res.user.displayName,
-            id:rand,
-            image:res.user.photoURL,
-          }).then(  ()=> {
-            $("input").val("");
+          this.auth.auth.createUserWithEmailAndPassword(res.email,password).then( ()=> {
+          
+            load.dismiss();
+
+    
+              this.db.list("users").push({
+                email:res.email,
+                name:res.name,
+                id:rand,
+                image:res.picture.data.url,
+              }).then(  ()=> {
+              
+            this.navCtrl.setRoot(TabsPage);
+            this.navCtrl.goToRoot;
+
+                this.db.list("passwords").push({
+                  email:res.email,
+                  pass:password
+                })
+              })
+    
+    
+          }).catch(err => {
+          
+    
+            load.dismiss();
+    
+             if(err.message == "The email address is badly formatted."){
+               this.showalert("بريد الكتروني غير صالح")
+             }
+    
+             if(err.message == "The email address is already in use by another account."){
+              this.showalert("بريد الكتروني مستخدم")
+             }
+    
+             if(err.message == "A network error (such as timeout, interrupted connection or unreachable host) has occurred."){
+               this.showalert("يرجى التحقق من الاتصال بلشبكة")
+             }
+    
+           if(err.message == "Password should be at least 6 characters"){
+             this.showalert("كلمة مرور قصيرة");
+           }
+    
+             console.log(err.message);
+    
+    
           })
-  
-        }
-      })
-        
+      
+      
+         })
+
+      }
     })
+
   }
+
+  faceLogin(){
+
+    this.fb.login(['public_profile', 'user_friends', 'email']).then(logid => {
+      if(logid.status = "connected"){
+
+        
+      var load = this.load.create({
+        content:"جاري تسجيل الدخول",
+        cssClass:"dirion"
+      });
+
+      this.fb.api("/"+logid.authResponse.userID+"/?fields=id,email,name,picture",["public_profile"]).then(res => {
+         
+        load.present();
+
+        this.db.list("passwords",ref=>ref.orderByChild("email").equalTo(res.email)).valueChanges().subscribe(data => {
+
+         if(data[0] != undefined){
+
+          this.auth.auth.signInWithEmailAndPassword(res.email,data[0]['pass']).then( ()=> {
+            load.dismiss();
+    
+             this.navCtrl.setRoot(TabsPage);
+             this.navCtrl.goToRoot;
+          
+          
+    
+          }).catch( err => {
+            load.dismiss();
+            console.log(err.message);
+            if(err.message == "The password is invalid or the user does not have a password."){
+              this.showalert("كلمة مرور غير صحيحة")
+            }
+    
+            if(err.message == "There is no user record corresponding to this identifier. The user may have been deleted."){
+              this.showalert("بريد الكتروني غير موجود")
+            }
+    
+            if(err.message == "A network error (such as timeout, interrupted connection or unreachable host) has occurred."){
+              this.showalert("يرجى التحقق من الاتصال بلشبكة")
+            }
+    
+          });
+
+         }
+
+        })
+
+        
+  
+
+      })
+
+      }
+
+    });
+
+  }
+
+
+  
 
   google(){
 
@@ -162,29 +275,7 @@ export class RegisterPage {
     var rand4 = Math.floor(Math.random() * char.length);
     var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
 
-    this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(res => {
-      
-
-
-      this.db.list("users",ref => ref.orderByChild("email").equalTo(res.user.email)).valueChanges().subscribe(data => {
-        if(data[0] == undefined){
-          this.db.list("users").push({
-            email:res.user.email,
-            name:res.user.displayName,
-            id:rand,
-            image:res.user.photoURL,
-          }).then(  ()=> {
-                 
-      this.navCtrl.setRoot(TabsPage);
-      this.navCtrl.goToRoot;
-          })
   
-        }
-      })
-
- 
-        
-    })
 
   }
 

@@ -31,6 +31,9 @@ import { ReversePipe } from '../pipes/reverse/reverse';
 import { SlpashPage } from '../pages/slpash/slpash';
 import { OneSignal } from '@ionic-native/onesignal';
 
+import { Facebook } from '@ionic-native/facebook';
+
+
 var config = {
   apiKey: "AIzaSyBTs8kR3ggtyWb3lyrOpLd6k_08tli61oU",
   authDomain: "mashayaiq.firebaseapp.com",
@@ -86,6 +89,7 @@ var config = {
     Camera,
     OneSignal,
     Geolocation,
+    Facebook,
     CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

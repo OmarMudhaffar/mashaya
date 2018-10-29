@@ -56,18 +56,14 @@
       <button ion-button color="secondary" outline (click)="singup(reemail.value,name.value,repass.value)" >انشاء حساب</button>
        <p (click)="showlogin()" >هل لديك حساب؟</p>
     </div>
-
-    <p class="or">او</p>
+    <p class="or">او انشأ حساب بستخدام</p>
 
     <div class="logmethod">
-      <button (click)="facebook()" >
-          <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
-        بستخدام 
+      <button (click)="facebookSingup()" >
+        Facebook 
+        <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
       </button>
-      <button (click)="google()">
-          <i class="fa fa-google" aria-hidden="true" style="color:#34a853;"></i>
-
-        بستخدام</button>
+ 
 
     </div>
 
@@ -97,17 +93,14 @@
        <p (click)="showsingup()" >ليس لديك حساب؟</p>
     </div>
 
-    <p class="or">او</p>
+    <p class="or">او سجل دخول بستخدام</p>
 
     <div class="logmethod">
-      <button (click)="facebook()" >
-          <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
-        بستخدام 
+      <button (click)="faceLogin()" >
+        Facebook 
+        <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
       </button>
-      <button (click)="google()">
-          <i class="fa fa-google" aria-hidden="true" style="color:#34a853;"></i>
-
-        بستخدام</button>
+  
 
     </div>
 

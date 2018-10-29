@@ -21,7 +21,6 @@ export class ContactPage {
   email;
   id;
   nofr = true;
-  nofrs = false;
 
   searchQuery: string = '';
   items : Array<any> = [];
@@ -50,7 +49,7 @@ export class ContactPage {
 
             if(data[0] == undefined){
               $("#loadsp").hide();
-              
+              this.nofr = false;
               $(".noproblem").show();
             
             }
@@ -293,6 +292,9 @@ $(".msearch input").animate({
 
   $(".addfriend").hide();
   $(".myfriends").show();
+
+  $(".searchbar-md").hide();
+
 
 })
 
