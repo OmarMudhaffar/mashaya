@@ -23,17 +23,14 @@ export class SlpashPage {
     public auth : AngularFireAuth) {
 
     auth.authState.subscribe(user => {
+
+      console.log(user)
+
       if(user != undefined){
      
-        if(user.emailVerified){
           navCtrl.setRoot(TabsPage);
           navCtrl.goToRoot;
-        }
-
-      if(!user.emailVerified){
-        navCtrl.setRoot(RegisterPage);
-        navCtrl.goToRoot;
-      }
+  
       }
       if(user == undefined){
         navCtrl.setRoot(RegisterPage);

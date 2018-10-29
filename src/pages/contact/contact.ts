@@ -45,7 +45,6 @@ export class ContactPage {
           db.list("friends/"+data[0]['id']).valueChanges().subscribe(data => {
           
             if(data[0] != undefined){
-              this.nofr = false;
               $("page-contact  .myspinner").hide();
             }
 

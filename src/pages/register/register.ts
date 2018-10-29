@@ -6,6 +6,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import { InfoPage } from '../info/info';
+import firebase from 'firebase';
 
 /**
  * Generated class for the RegisterPage page.
@@ -65,18 +66,17 @@ export class RegisterPage {
 
       this.auth.auth.createUserWithEmailAndPassword(email,pass).then( ()=> {
       
-        this.auth.auth.currentUser.sendEmailVerification().then( ()=> {
- 
-          load.dismiss();
+        load.dismiss();
 
-          var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
-          var rand1 = Math.floor(Math.random() * char.length);
-          var rand2 = Math.floor(Math.random() * char.length);
-          var rand3 = Math.floor(Math.random() * char.length);
-          var rand4 = Math.floor(Math.random() * char.length);
-          var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
+        var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
+        var rand1 = Math.floor(Math.random() * char.length);
+        var rand2 = Math.floor(Math.random() * char.length);
+        var rand3 = Math.floor(Math.random() * char.length);
+        var rand4 = Math.floor(Math.random() * char.length);
+        var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
 
-          this.showalert("تم ارسال رابط التفعيل")
+        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.goToRoot;
 
           this.db.list("users").push({
             email:email,
@@ -87,7 +87,6 @@ export class RegisterPage {
             $("input").val("");
           })
 
-        })
 
       }).catch(err => {
       
@@ -118,6 +117,77 @@ export class RegisterPage {
   }
 
 
+
+  facebook(){
+
+    
+    var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
+    var rand1 = Math.floor(Math.random() * char.length);
+    var rand2 = Math.floor(Math.random() * char.length);
+    var rand3 = Math.floor(Math.random() * char.length);
+    var rand4 = Math.floor(Math.random() * char.length);
+    var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
+
+    this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(res => {
+      
+
+      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.goToRoot;
+
+      this.db.list("users",ref => ref.orderByChild("email").equalTo(res.user.email)).valueChanges().subscribe(data => {
+        if(data[0] == undefined){
+          this.db.list("users").push({
+            email:res.user.email,
+            name:res.user.displayName,
+            id:rand,
+            image:res.user.photoURL,
+          }).then(  ()=> {
+            $("input").val("");
+          })
+  
+        }
+      })
+        
+    })
+  }
+
+  google(){
+
+
+    
+    var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
+    var rand1 = Math.floor(Math.random() * char.length);
+    var rand2 = Math.floor(Math.random() * char.length);
+    var rand3 = Math.floor(Math.random() * char.length);
+    var rand4 = Math.floor(Math.random() * char.length);
+    var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
+
+    this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(res => {
+      
+
+
+      this.db.list("users",ref => ref.orderByChild("email").equalTo(res.user.email)).valueChanges().subscribe(data => {
+        if(data[0] == undefined){
+          this.db.list("users").push({
+            email:res.user.email,
+            name:res.user.displayName,
+            id:rand,
+            image:res.user.photoURL,
+          }).then(  ()=> {
+                 
+      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.goToRoot;
+          })
+  
+        }
+      })
+
+ 
+        
+    })
+
+  }
+
   login(email,pass){
 
 
@@ -132,22 +202,11 @@ export class RegisterPage {
       this.auth.auth.signInWithEmailAndPassword(email,pass).then( ()=> {
         load.dismiss();
 
-       if(this.auth.auth.currentUser.emailVerified == true){
          this.navCtrl.setRoot(TabsPage);
          this.navCtrl.goToRoot;
       
-       }
+      
 
-       if(this.auth.auth.currentUser.emailVerified == false){
-        var alert = this.alert.create({
-          subTitle:"قم بتأكيد البريد الالكتروني",
-          cssClass:"dirion",
-          buttons:["حسنا",{text:"ارسال التأكيد",handler: ()=> {
-            this.auth.auth.currentUser.sendEmailVerification();
-          } }],
-        });
-        alert.present();
-       }
       }).catch( err => {
         load.dismiss();
         console.log(err.message);

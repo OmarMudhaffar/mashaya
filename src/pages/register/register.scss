@@ -117,3 +117,34 @@ page-register .micon{
     font-size: 31px;
     color: #1e8aff;
 }
+
+page-register .logmethod {
+
+display: flex;
+
+}
+
+page-register .or {
+    font-family: 'Cairo', sans-serif;
+    font-size: 17px;
+}
+
+page-register .logmethod button {
+    width: 100%;
+    padding: 15px 20px !important;
+    color: #000 !important;
+    background: transparent;
+    border-radius: 2px;
+    border: 1px solid #000 !important;
+ 
+}
+
+page-register .logmethod i {
+    position: relative !important;
+    top: 0;
+    left: -5px;
+}
+
+page-register .logmethod button:first-child {
+    margin-right: 3px;
+}

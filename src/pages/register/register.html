@@ -56,6 +56,21 @@
       <button ion-button color="secondary" outline (click)="singup(reemail.value,name.value,repass.value)" >انشاء حساب</button>
        <p (click)="showlogin()" >هل لديك حساب؟</p>
     </div>
+
+    <p class="or">او</p>
+
+    <div class="logmethod">
+      <button (click)="facebook()" >
+          <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
+        بستخدام 
+      </button>
+      <button (click)="google()">
+          <i class="fa fa-google" aria-hidden="true" style="color:#34a853;"></i>
+
+        بستخدام</button>
+
+    </div>
+
 </div>
 
 <!--login view-->
@@ -80,6 +95,20 @@
     <div class="logorreg">
       <button ion-button color="secondary" outline (click)="login(lgemail.value,lgpass.value)" >تسجيل دخول</button>
        <p (click)="showsingup()" >ليس لديك حساب؟</p>
+    </div>
+
+    <p class="or">او</p>
+
+    <div class="logmethod">
+      <button (click)="facebook()" >
+          <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
+        بستخدام 
+      </button>
+      <button (click)="google()">
+          <i class="fa fa-google" aria-hidden="true" style="color:#34a853;"></i>
+
+        بستخدام</button>
+
     </div>
 
 </div>
