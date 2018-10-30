@@ -145,6 +145,7 @@ export class ContactPage {
     var winh = $(window).height();
     var navh = $(".header").innerHeight();
     var tabmd = $(".tabs-md .tab-button").innerHeight();
+
   
     $("page-contact .myspinner").height(winh - (navh+tabmd));
 

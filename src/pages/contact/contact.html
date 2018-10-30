@@ -15,7 +15,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
 
 
   
@@ -27,38 +27,46 @@
         </div>
     </div>
 
-<div class="myfriends">
 
-  <ion-list>
-    <ion-item *ngFor="let item of friends | async | reverse">
-      <ion-avatar item-start>
-        <img [src]="item.image">
-      </ion-avatar>
-      <h2>{{item.name}}</h2>
-      <button ion-button clear item-end (click)="sendHelp(item.fremail,item.name)" >شارك موقعك</button>
-    </ion-item>
+    <div class="myfriends">
 
-  </ion-list>
+        <ion-list>
+          
+         <div class="mcontainer">
 
-</div>
+            <ion-item *ngFor="let item of friends | async | reverse">
+                <ion-avatar item-start>
+                  <img [src]="item.image">
+                </ion-avatar>
+                <h2>{{item.name}}</h2>
+                <button ion-button clear item-end (click)="sendHelp(item.fremail,item.name)" >شارك موقعك</button>
+              </ion-item>
 
+         </div>
+      
+        </ion-list>
+      
+      </div>
+      
+      
+      <div class="addfriend">
+      
+      
+        <ion-list>
+          
+          <div class="shwornot" *ngFor="let item of items | reverse">
+            <ion-item *ngIf="item.email != email">
+                <ion-avatar item-start>
+                  <img [src]="item.image">
+                </ion-avatar>
+                <h2>{{item.name}}</h2>
+                <button ion-button clear item-end (click)="addfriend(item.email,item.name,item.image,item.id)" >اضافة كصديق</button>
+              </ion-item>
+        </div>
+        </ion-list>
+      
+      </div>
+      
 
-<div class="addfriend">
-
-
-  <ion-list>
-    
-    <div class="shwornot" *ngFor="let item of items | reverse">
-      <ion-item *ngIf="item.email != email">
-          <ion-avatar item-start>
-            <img [src]="item.image">
-          </ion-avatar>
-          <h2>{{item.name}}</h2>
-          <button ion-button clear item-end (click)="addfriend(item.email,item.name,item.image,item.id)" >اضافة كصديق</button>
-        </ion-item>
-  </div>
-  </ion-list>
-
-</div>
 
 </ion-content>
