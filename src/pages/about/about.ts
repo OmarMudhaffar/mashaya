@@ -45,8 +45,9 @@ export class AboutPage {
 
             }
             if(data[0] != undefined){
-
              $("page-about .myspinner").hide();
+             $("page-about .mcontent").css("padding","17px");
+
             }
           })
  
