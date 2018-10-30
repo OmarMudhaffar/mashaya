@@ -56,9 +56,16 @@ page-info .item-md p {
 page-info .about 
 {
     font-family: 'Cairo', sans-serif;
-    margin: 50px 10px;
-    text-align: center;
+    margin: 30px 20px;
+    text-align: justify;
     direction: rtl;
+}
+
+page-info h2 {
+    font-family: 'Cairo', sans-serif;
+    color: #ea4335;
+    margin-top: 30px;
+    text-align: center;
 }
 
 page-info i {
