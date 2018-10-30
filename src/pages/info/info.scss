@@ -56,7 +56,7 @@ page-info .item-md p {
 page-info .about 
 {
     font-family: 'Cairo', sans-serif;
-    margin: 30px 10px;
+    margin: 50px 10px;
     text-align: center;
     direction: rtl;
 }
@@ -64,4 +64,13 @@ page-info .about
 page-info i {
     color: #676767;
     margin: 3px;
+}
+
+.item-md {
+    margin-bottom: 5px;
+}
+
+.item-md ion-icon[item-start] {
+    margin-bottom: 2px;
+    color: #676767;
 }

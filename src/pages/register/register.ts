@@ -7,7 +7,9 @@ import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import { InfoPage } from '../info/info';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-
+import { GooglePlus } from '@ionic-native/google-plus';
+import { HTTP } from '@ionic-native/http';
+import firebase from 'firebase';
 
 /**
  * Generated class for the RegisterPage page.
@@ -28,13 +30,13 @@ export class RegisterPage {
       public auth : AngularFireAuth,
       public alert : AlertController,public load : LoadingController,
       public db : AngularFireDatabase,
-      private fb: Facebook) {
+      private fb: Facebook,private googlePlus: GooglePlus, public http : HTTP) {
 
  
   }
 
   ionViewDidLoad() {
-
+   console.log("cccccccccccccccccccccccccccccccccccccccccccc")
   }
 
   ngOnInit(){
@@ -54,6 +56,56 @@ export class RegisterPage {
     });
     return alert.present();
   }
+
+
+
+  singUpGoogle(){
+
+    var load = this.load.create({
+      content:"جاري المعالجة",
+      cssClass:"dirion"
+    });
+
+    var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
+        var rand1 = Math.floor(Math.random() * char.length);
+        var rand2 = Math.floor(Math.random() * char.length);
+        var rand3 = Math.floor(Math.random() * char.length);
+        var rand4 = Math.floor(Math.random() * char.length);
+        var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
+
+    this.googlePlus.login({
+      'webClientId':"216519128906-120gn5ihrtjk6ia2kh8n4cjoh4n9eho4.apps.googleusercontent.com",
+      'offline':true
+    }).then(res => {
+
+      load.present();
+
+      firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken)).then(suc => {
+        
+        load.dismiss();
+
+        this.db.list("users",ref=>ref.orderByChild("email").equalTo(res.email)).valueChanges().subscribe(usercheck => {
+          
+          if(usercheck[0] == undefined){
+
+            this.db.list("users").push({
+              email:res.email,
+              name:res.displayName,
+              id:rand,
+              image:res.imageUrl,
+            })
+          
+        }
+
+        })
+
+      }).catch(err => {
+        console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+      })
+    })
+  }
+
+
 
   singup(email,name,pass){
     var load = this.load.create({
@@ -119,12 +171,10 @@ export class RegisterPage {
   }
 
 
+  fblogin(){
 
-  facebookSingup(){
-
-    
     var load = this.load.create({
-      content:"جاري انشاء الحساب",
+      content:"جاري المعالجة",
       cssClass:"dirion"
     });
 
@@ -134,151 +184,52 @@ export class RegisterPage {
     var rand3 = Math.floor(Math.random() * char.length);
     var rand4 = Math.floor(Math.random() * char.length);
     var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
-    var password = char[rand1] + char[rand2] + char[rand3] + char[rand4] + "2443";
+
+this.fb.login(['email']).then(res => {
+
+  load.present();
 
 
-    this.fb.login(['public_profile', 'user_friends', 'email']).then(logid => {
-      if(logid.status = "connected"){
-       
-      
+  const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
 
-        this.fb.api("/"+logid.authResponse.userID+"/?fields=id,email,name,picture",["public_profile"]).then(res => {
-         
-          load.present();
 
-          this.auth.auth.createUserWithEmailAndPassword(res.email,password).then( ()=> {
+  firebase.auth().signInWithCredential(fc).then(done => {
+
+
+    load.dismiss();
+
+    this.fb.api("/"+res.authResponse.userID+"/?fields=id,email,name,picture",["public_profile"]).then(res => {
+
+
+      this.db.list("users",ref=>ref.orderByChild("email").equalTo(res.email)).valueChanges().subscribe(usercheck => {
           
-            load.dismiss();
+        if(usercheck[0] == undefined){
 
-    
-              this.db.list("users").push({
-                email:res.email,
-                name:res.name,
-                id:rand,
-                image:res.picture.data.url,
-              }).then(  ()=> {
-              
-            this.navCtrl.setRoot(TabsPage);
-            this.navCtrl.goToRoot;
-
-                this.db.list("passwords").push({
-                  email:res.email,
-                  pass:password
-                })
-              })
-    
-    
-          }).catch(err => {
-          
-    
-            load.dismiss();
-    
-             if(err.message == "The email address is badly formatted."){
-               this.showalert("بريد الكتروني غير صالح")
-             }
-    
-             if(err.message == "The email address is already in use by another account."){
-              this.showalert("بريد الكتروني مستخدم")
-             }
-    
-             if(err.message == "A network error (such as timeout, interrupted connection or unreachable host) has occurred."){
-               this.showalert("يرجى التحقق من الاتصال بلشبكة")
-             }
-    
-           if(err.message == "Password should be at least 6 characters"){
-             this.showalert("كلمة مرور قصيرة");
-           }
-    
-             console.log(err.message);
-    
-    
+          this.db.list("users").push({
+            email:res.email,
+             name:res.name,
+            id:rand,
+            image:res.picture.data.url,
           })
-      
-      
-         })
-
+        
       }
-    })
-
-  }
-
-  faceLogin(){
-
-    this.fb.login(['public_profile', 'user_friends', 'email']).then(logid => {
-      if(logid.status = "connected"){
-
-        
-      var load = this.load.create({
-        content:"جاري تسجيل الدخول",
-        cssClass:"dirion"
-      });
-
-      this.fb.api("/"+logid.authResponse.userID+"/?fields=id,email,name,picture",["public_profile"]).then(res => {
-         
-        load.present();
-
-        this.db.list("passwords",ref=>ref.orderByChild("email").equalTo(res.email)).valueChanges().subscribe(data => {
-
-         if(data[0] != undefined){
-
-          this.auth.auth.signInWithEmailAndPassword(res.email,data[0]['pass']).then( ()=> {
-            load.dismiss();
-    
-             this.navCtrl.setRoot(TabsPage);
-             this.navCtrl.goToRoot;
-          
-          
-    
-          }).catch( err => {
-            load.dismiss();
-            console.log(err.message);
-            if(err.message == "The password is invalid or the user does not have a password."){
-              this.showalert("كلمة مرور غير صحيحة")
-            }
-    
-            if(err.message == "There is no user record corresponding to this identifier. The user may have been deleted."){
-              this.showalert("بريد الكتروني غير موجود")
-            }
-    
-            if(err.message == "A network error (such as timeout, interrupted connection or unreachable host) has occurred."){
-              this.showalert("يرجى التحقق من الاتصال بلشبكة")
-            }
-    
-          });
-
-         }
-
-        })
-
-        
-  
 
       })
 
-      }
+    })
 
-    });
-
-  }
-
-
-  
-
-  google(){
+  }).catch(err => {
+    this.showalert(JSON.stringify(err))
+  })
 
 
-    
-    var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
-    var rand1 = Math.floor(Math.random() * char.length);
-    var rand2 = Math.floor(Math.random() * char.length);
-    var rand3 = Math.floor(Math.random() * char.length);
-    var rand4 = Math.floor(Math.random() * char.length);
-    var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
-
-  
+})
 
   }
 
+
+
+  
   login(email,pass){
 
 

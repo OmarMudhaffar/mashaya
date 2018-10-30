@@ -33,6 +33,9 @@ import { OneSignal } from '@ionic-native/onesignal';
 
 import { Facebook } from '@ionic-native/facebook';
 
+import { GooglePlus } from '@ionic-native/google-plus';
+
+import { HTTP } from '@ionic-native/http';
 
 var config = {
   apiKey: "AIzaSyBTs8kR3ggtyWb3lyrOpLd6k_08tli61oU",
@@ -66,7 +69,7 @@ var config = {
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -91,6 +94,8 @@ var config = {
     Geolocation,
     Facebook,
     CallNumber,
+    GooglePlus,
+    HTTP,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

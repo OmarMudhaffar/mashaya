@@ -25,10 +25,17 @@ page-register .toolbar-title-md ion-icon{
 
 
 
+page-register .header-content {
+    display: flex;
+    align-items: center;
+}
+
+
 page-register .header-content .content {
     width: 100%;
     position: relative;
     text-align: center;
+    
 }
 
 
@@ -38,7 +45,7 @@ page-register .logorreg {
     direction: rtl;
 }
 
-page-register .header-content .content .inputs button {
+page-register .header-content .content .inputs button:first-child {
     padding: 20px;
     display: block;
     border: 1px solid #007bff !important;
@@ -130,16 +137,25 @@ page-register .or {
 page-register .logmethod button {
     width: 100%;
     padding: 15px 20px !important;
-    color: #000 !important;
     background: transparent;
     border-radius: 2px;
-    border: 1px solid #000 !important;
- 
+    border: 0 !important;
 }
 
 page-register .logmethod i {
     position: relative !important;
     top: 0;
-    right: -5px;
+    left: -3px;
+    color: #FFF !important;
 }
 
+page-register .logmethod button:first-child {
+    margin-right: 3px;
+    background: #4267b2 !important;
+    color: #FFF !important;
+}
+
+page-register .logmethod button:last-child {
+    background: #ea4335 !important;
+    color: #FFF !important;
+}

@@ -14,7 +14,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
 <div class="header-content" id="header-content">
 
@@ -56,14 +56,19 @@
       <button ion-button color="secondary" outline (click)="singup(reemail.value,name.value,repass.value)" >انشاء حساب</button>
        <p (click)="showlogin()" >هل لديك حساب؟</p>
     </div>
-    <p class="or">او انشأ حساب بستخدام</p>
+    <p class="or">او انشأ حساب بأستخدام</p>
 
     <div class="logmethod">
-      <button (click)="facebookSingup()" >
+      <button (click)="fblogin()" >
+          <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
+
         Facebook 
-        <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
       </button>
- 
+      <button (click)="singUpGoogle()">
+          <i class="fa fa-google" aria-hidden="true" style="color:#34a853;"></i>
+
+        Google
+      </button>
 
     </div>
 
@@ -93,14 +98,19 @@
        <p (click)="showsingup()" >ليس لديك حساب؟</p>
     </div>
 
-    <p class="or">او سجل دخول بستخدام</p>
+    <p class="or">او سجل دخول بأستخدام</p>
 
     <div class="logmethod">
-      <button (click)="faceLogin()" >
+      <button (click)="fblogin()" >
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+
         Facebook 
-        <i class="fa fa-facebook" aria-hidden="true" style="color:#4267b2;"></i>
       </button>
-  
+      <button (click)="singUpGoogle()">
+          <i class="fa fa-google" aria-hidden="true" style="color:#34a853;"></i>
+
+        Google
+      </button>
 
     </div>
 
