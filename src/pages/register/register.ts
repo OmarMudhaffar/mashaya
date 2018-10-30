@@ -219,7 +219,8 @@ this.fb.login(['email']).then(res => {
     })
 
   }).catch(err => {
-    this.showalert("استخدم حساب مختلف")
+    this.showalert("استخدم حساب مختلف");
+    load.dismiss();
   })
 
 
