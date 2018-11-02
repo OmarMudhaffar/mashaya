@@ -22,7 +22,7 @@ export class SlpashPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public auth : AngularFireAuth) {
 
-    auth.authState.subscribe(user => {
+   var check = auth.authState.subscribe(user => {
 
       console.log(user)
 
@@ -37,7 +37,6 @@ export class SlpashPage {
         navCtrl.goToRoot;
       }
     })
-
 
   }
 

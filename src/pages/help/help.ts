@@ -149,6 +149,9 @@ export class HelpPage {
 
   add(problem,place,description,phone,mohafada){
 
+    var x = <HTMLMediaElement>document.getElementById("myAudio"); 
+
+    
   if(problem.length > 1 && place.length > 1 && description.length > 10 && phone.length >= 10 && mohafada.length >1 ){
     var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
     var rand1 = Math.floor(Math.random() * char.length);
@@ -182,6 +185,8 @@ this.db.list("problems").push({
   markname:problem,
   image:this.image,
  }).then( ()=> {
+  x.play()
+  
   $("input").val("");
   $("textarea").val("");
  var toast = this.toast.create({
@@ -189,6 +194,8 @@ this.db.list("problems").push({
   duration:3000,
    message:"تم نشر المشكلة"
  }).present();
+
+
  });
 
   }
@@ -219,5 +226,8 @@ this.db.list("problems").push({
   })
 
   }
+
+
+
 
 }
