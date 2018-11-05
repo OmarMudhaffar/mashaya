@@ -152,7 +152,7 @@ export class HelpPage {
     var x = <HTMLMediaElement>document.getElementById("myAudio"); 
 
     
-  if(problem.length > 1 && place.length > 1 && description.length > 10 && phone.length >= 10 && mohafada.length >1 ){
+  if(problem.length > 1 && place.length > 1 && description.length > 1 && phone.length >= 1 && mohafada.length >1 ){
     var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
     var rand1 = Math.floor(Math.random() * char.length);
     var rand2 = Math.floor(Math.random() * char.length);
@@ -212,7 +212,7 @@ this.db.list("problems").push({
         app_id:"06cdfaf2-b067-4d85-a095-162869f76c6f",
         include_player_ids:[id['id']],
         contents: {
-          en: "هناك شخص بحاجة الة مساعدة"
+          en: "هناك شخص بحاجة الى مساعدة"
         },
         headings: {
           en: "مشكلة"

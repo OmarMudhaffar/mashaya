@@ -28,7 +28,7 @@
 
 
 <input type="text" placeholder="نقطة دالة" #place>
-<input type="text" placeholder="رقم الهاتف (اجباري)" #phone>
+<input type="number" placeholder="رقم الهاتف (اجباري)" #phone>
 
 <textarea placeholder="وصف المشكلة" #description></textarea>
 <button ion-button outline (click)="add(problem.value,place.value,description.value,phone.value,mohafada.value)">نشر المشكلة</button>
