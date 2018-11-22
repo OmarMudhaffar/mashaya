@@ -98,5 +98,10 @@
         <variable name="PLAY_SERVICES_VERSION" value="11.8.0" />
     </plugin>
     <plugin name="cordova-plugin-advanced-http" spec="2.0.1" />
-    <engine name="android" spec="^7.1.1" />
+    <plugin name="cordova-plugin-facebook4" spec="3.1.0">
+        <variable name="APP_ID" value="550616662075592" />
+        <variable name="APP_NAME" value="Mashaya" />
+        <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.37.0" />
+    </plugin>
+    <engine name="android" spec="7.1.1" />
 </widget>

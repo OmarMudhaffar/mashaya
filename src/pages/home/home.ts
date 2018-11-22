@@ -10,7 +10,6 @@ import { CallNumber } from '@ionic-native/call-number';
 import * as $ from 'jquery'
 import { OneSignal } from '@ionic-native/onesignal';
 
-declare var google;
 import {
   GoogleMap,
   Marker,
